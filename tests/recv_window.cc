@@ -93,7 +93,7 @@ int main()
       test.execute( ReadAll { "abcd" } );
     }
 
-    // credit for test: Jared Wasserman + Anonymous
+    //credit for test: Jared Wasserman + Anonymous
     {
       const size_t cap = 4;
       const uint32_t isn = 23452;

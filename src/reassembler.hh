@@ -1,7 +1,9 @@
 #pragma once
-
+#include <utility>
+#include <string>
+#include <set>
 #include "byte_stream.hh"
-
+using namespace std;
 class Reassembler
 {
 public:
@@ -42,4 +44,15 @@ public:
 
 private:
   ByteStream output_; // the Reassembler writes to this ByteStream
+  string buffer=""; // It represents the String which we have written to the writter
+  // used to record the index of the bytestreams's end which we have written into the bytestreams;
+  uint64_t start=0;
+  uint64_t buffer_start = 0;
+  set<pair<uint64_t,string>> internal_store={};
+  uint64_t pending_size = 0;
+  uint64_t finish_end = 0;
+  bool finish = false;
+
+  void push_buffer( uint64_t first_index,string data);
+  pair<uint64_t,string> pop_buffer();
 };

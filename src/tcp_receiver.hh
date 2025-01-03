@@ -27,4 +27,6 @@ public:
 
 private:
   Reassembler reassembler_;
+  Wrap32 zero_point  {0}; // if we meet the SYN,we need to set a zero_point
+  bool has_value{false};
 };

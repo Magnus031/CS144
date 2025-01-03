@@ -10,14 +10,26 @@
 #include <memory>
 #include <optional>
 #include <queue>
+#include <utility>
+
+using namespace std;
 
 class TCPSender
 {
 public:
+  /**
+   * @param input the input bytestream
+   * @param isn   Wrap32
+   * @param uint64_t the time fragment for waiting the last eldest outstanding segement;
+   * 
+  */
   /* Construct TCP sender with given default Retransmission Timeout and possible ISN */
   TCPSender( ByteStream&& input, Wrap32 isn, uint64_t initial_RTO_ms )
     : input_( std::move( input ) ), isn_( isn ), initial_RTO_ms_( initial_RTO_ms )
-  {}
+  {
+    // initial the rto value;
+    this->current_RTO = initial_RTO_ms;
+  }
 
   /* Generate an empty TCPSenderMessage */
   TCPSenderMessage make_empty_message() const;
@@ -46,6 +58,25 @@ public:
 private:
   // Variables initialized in constructor
   ByteStream input_;
+  // The initial zero point.
   Wrap32 isn_;
   uint64_t initial_RTO_ms_;
+  
+  // The helper members we predefined;
+  // The outStanding segements queue;
+  queue<pair<uint64_t,TCPSenderMessage>> outStandingQueue{};
+  // The number we have pushed into the byteStream;
+  // Also it represents the index in the absolute sequence;
+  uint64_t number{0};
+  // Next Index, The stream index that we have successfully pushed;
+  uint64_t first_id{0};
+  // The state information that we need to change after receiving
+  uint64_t window_size{1};
+  // Retransmission
+  uint64_t retransmission_times{0};
+  uint64_t current_RTO{0};
+  uint64_t current_waiting{0};
+  // Finish label
+  bool finished{false};
+  bool SYN{false};
 };

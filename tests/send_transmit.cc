@@ -15,7 +15,6 @@ int main()
 {
   try {
     auto rd = get_random_engine();
-
     {
       TCPConfig cfg;
       const Wrap32 isn( rd() );
@@ -141,7 +140,6 @@ int main()
       test.execute( ExpectSeqnosInFlight { 0 } );
       test.execute( ExpectNoSegment {} );
     }
-
     {
       TCPConfig cfg;
       const Wrap32 isn( rd() );

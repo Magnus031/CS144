@@ -6,7 +6,16 @@
 
 class Reader;
 class Writer;
-
+/**
+ * What do we need to do?
+ * ByteStream 是一个字节流的类，我们把它抽象成一个对象，什么对象呢？就是简单的来说具有两种方法
+ * 1. 写 Writer() 也就是我们对这个有规定尺寸的字节流长度的ByteStream进行抽象，具有最大的容量 Capacity_
+ *    - 每次对ByteStream进行写，push(std::string data).我们要对data的size进行判定，是否能继续的往ByteStream中输入; 
+ *    - 
+ * 2. 读 Reader() 
+ * 
+ * 
+*/
 class ByteStream
 {
 public:
@@ -21,10 +30,16 @@ public:
   void set_error() { error_ = true; };       // Signal that the stream suffered an error.
   bool has_error() const { return error_; }; // Has the stream had an error?
 
+// protected represents that it can be used in other class which borned from this class;
 protected:
   // Please add any additional state to the ByteStream here, and not to the Writer and Reader interfaces.
   uint64_t capacity_;
   bool error_ {};
+  bool finished_write{false};
+  // It records the number of bytes that we 
+  uint64_t numberOfBytes=0;
+  uint64_t numberOfPop=0;
+  std::string byteFlow="";
 };
 
 class Writer : public ByteStream

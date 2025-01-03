@@ -35,7 +35,9 @@ int main()
       const Wrap32 isn( rd() );
       cfg.isn = isn;
 
+      // here we set a new isn 
       TCPSenderTestHarness test { "SYN acked test", cfg };
+      // here Push{} represetnts that the byteStream input_ is empty();
       test.execute( Push {} );
       test.execute( ExpectMessage {}.with_no_flags().with_syn( true ).with_payload_size( 0 ).with_seqno( isn ) );
       test.execute( ExpectSeqno { isn + 1 } );
@@ -51,6 +53,7 @@ int main()
       cfg.isn = isn;
 
       TCPSenderTestHarness test { "SYN -> wrong ack test", cfg };
+      // here Push{} represetnts that the byteStream input_ is empty();
       test.execute( Push {} );
       test.execute( ExpectMessage {}.with_no_flags().with_syn( true ).with_payload_size( 0 ).with_seqno( isn ) );
       test.execute( ExpectSeqno { isn + 1 } );

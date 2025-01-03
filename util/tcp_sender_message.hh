@@ -22,10 +22,21 @@
  * 5) The RST (reset) flag. If set, the stream has suffered an error and the connection should be aborted.
  */
 
+// SYN payload FIN;
 struct TCPSenderMessage
 {
+  // The default construct function;
+  TCPSenderMessage(){}
+  TCPSenderMessage(Wrap32 seqno,bool SYN,std::string payload,bool FIN,bool RST){
+    this->FIN = FIN;
+    this->payload = payload;
+    this->RST=RST;
+    this->seqno = seqno;
+    this->SYN = SYN;
+  }
+  // The start index of the segment;
   Wrap32 seqno { 0 };
-
+  // To record whether it is the start of the segment;
   bool SYN {};
   std::string payload {};
   bool FIN {};

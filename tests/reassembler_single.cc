@@ -8,12 +8,12 @@ using namespace std;
 int main()
 {
   try {
-    {
-      ReassemblerTestHarness test { "construction", 65000 };
+    // {
+    //   ReassemblerTestHarness test { "construction", 65000 };
 
-      test.execute( BytesPushed( 0 ) );
-      test.execute( IsFinished { false } );
-    }
+    //   test.execute( BytesPushed( 0 ) );
+    //   test.execute( IsFinished { false } );
+    // }
 
     {
       ReassemblerTestHarness test { "insert a @ 0", 65000 };

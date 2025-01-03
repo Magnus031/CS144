@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24.2)
-
+set(CMAKE_CXX_COMPILER "clang++" CACHE STRING "C++ compiler" FORCE)
 project(minnow CXX)
 
 if(${CMAKE_GENERATOR} STREQUAL "Unix Makefiles")

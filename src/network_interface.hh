@@ -74,7 +74,7 @@ private:
   void transmit( const EthernetFrame& frame ) const { port_->transmit( *this, frame ); }
 
   // Ethernet (known as hardware, network-access-layer, or link-layer) address of the interface
-  EthernetAddress ethernet_address_;
+  [[maybe_unused]] EthernetAddress ethernet_address_;
 
   // IP (known as internet-layer or network-layer) address of the interface
   Address ip_address_;
